@@ -4,11 +4,12 @@ const socketIo = require('socket.io');
 const cors = require('cors')
 const bodyParser = require("body-parser")
 
+//load env
+require('dotenv').config();
+const CLIENT = process.env.CLIENT_URL;
+const PORT = process.env.PORT;
+
 const app = express();
-// const SOCKET_URL = process.env.REACT_APP_SOCKET_URL || "http://localhost:3000"
-// const CLIENT = "http://localhost";
-const CLIENT = "https://my-personal-website-craqo.ondigitalocean.app";
-console.log("SOCKET-SERVER.JS: ", CLIENT);
 app.use(cors({ origin: CLIENT }));
 app.use(bodyParser.json())
 
@@ -37,7 +38,11 @@ app.post('/data-from-flask', (req, res) => {
   res.status(200).json({ message: 'Data received and sent to clients' });
 });
 
-const PORT = 3001;
+app.get('/express-test', (req, res) => {
+  res.send('Hello World ' + process.env.MANDONG_TEST);
+});
+
+
 server.listen(PORT, () => {
   console.log(`Socket.io server listening on port ${server.address().address}:${PORT}`);
 });
