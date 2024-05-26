@@ -7,7 +7,9 @@ const bodyParser = require("body-parser")
 //load env
 require('dotenv').config();
 const CLIENT = process.env.CLIENT_URL;
-const PORT = process.env.PORT;
+const SOCKET_PORT = process.env.SOCKET_PORT;
+console.log("SOCKET UTILS:: CLIENT", CLIENT);
+console.log("SOCKET UTILS:: PORT", SOCKET_PORT);
 
 const app = express();
 app.use(cors({ origin: CLIENT }));
@@ -43,6 +45,6 @@ app.get('/express-test', (req, res) => {
 });
 
 
-server.listen(PORT, () => {
-  console.log(`Socket.io server listening on port ${server.address().address}:${PORT}`);
+server.listen(SOCKET_PORT, () => {
+  console.log(`Socket.io server listening on port ${server.address().address}:${SOCKET_PORT}`);
 });
